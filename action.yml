@@ -1,4 +1,4 @@
-name: 'File Sync'
+name: 'Repo Settings Sync'
 description: 'Github Action to setup repository settings'
 author: 'kbrashears5'
 branding:
