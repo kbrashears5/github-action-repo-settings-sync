@@ -1,0 +1,56 @@
+name: 'File Sync'
+description: 'Github Action to setup repository settings'
+author: 'kbrashears5'
+branding:
+  icon: 'upload-cloud'
+  color: 'purple'
+inputs:
+  REPOSITORIES:
+    description: 'Github repositories to setup. Default will get all public repositories for your username'
+    required: false
+    default: 'ALL'
+  ALLOW_ISSUES:
+    description: 'Whether or not to allow issues on the repo'
+    required: false
+    default: 'true'
+  ALLOW_PROJECTS:
+    description: 'Whether or not to allow projects on the repo'
+    required: false
+    default: 'true'
+  ALLOW_WIKI:
+    description: 'Whether or not to allow wiki on the repo'
+    required: false
+    default: 'true'
+  SQUASH_MERGE:
+    description: 'Whether or not to allow squash merges on the repo'
+    required: false
+    default: 'true'
+  MERGE_COMMIT:
+    description: 'Whether or not to allow merge commits on the repo'
+    required: false
+    default: 'true'
+  REBASE_MERGE:
+    description: 'Whether or not to allow rebase merges on the repo'
+    required: false
+    default: 'true'
+  DELETE_HEAD:
+    description: 'Whether or not to delete head branch after merges'
+    required: false
+    default: 'false'
+  TOKEN:
+    description: 'Personal access token with Repo privileges'
+    required: true
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.REPOSITORIES }}
+    - ${{ inputs.ALLOW_ISSUES }}
+    - ${{ inputs.ALLOW_PROJECTS }}
+    - ${{ inputs.ALLOW_WIKI }}
+    - ${{ inputs.SQUASH_MERGE }}
+    - ${{ inputs.MERGE_COMMIT }}
+    - ${{ inputs.REBASE_MERGE }}
+    - ${{ inputs.DELETE_HEAD }}
+    - ${{ inputs.TOKEN }}

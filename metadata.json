@@ -1,0 +1,10 @@
+{
+    "description": "Github Action to setup repository settings and keep them in sync",
+    "homepage": "https://github.com/kbrashears5/github-action-repo-setup",
+    "keywords": [
+        "sync",
+        "repo",
+        "settings",
+        "utilities"
+    ]
+}
