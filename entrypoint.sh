@@ -21,8 +21,11 @@ echo "Merge Commit    : $MERGE_COMMIT"
 REBASE_MERGE=($INPUT_REBASE_MERGE)
 echo "Rebase Merge    : $REBASE_MERGE"
 DELETE_HEAD=($INPUT_DELETE_HEAD)
-echo "Delete Head        : $DELETE_HEAD"
+echo "Delete Head     : $DELETE_HEAD"
 GITHUB_TOKEN="$INPUT_TOKEN"
+echo "---------------------------------------------"
+
+echo " "
 
 # set temp path
 TEMP_PATH="/ghars/"
@@ -30,7 +33,6 @@ cd /
 mkdir "$TEMP_PATH"
 cd "$TEMP_PATH"
 echo "Temp Path       : $TEMP_PATH"
-echo "---------------------------------------------"
 
 echo " "
 
@@ -43,7 +45,7 @@ echo " "
 
 # get all repos, if specified
 if [ "${REPOSITORIES[0]}" == "ALL"]; then
-    REPOSITORIES=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -u ${USERNAME}:${GITHUB_TOKEN} --silent ${GITHUB_API_URL}/users/${USERNAME}/repos) | jq '.[].full_name')
+    REPOSITORIES=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -u ${USERNAME}:${GITHUB_TOKEN} --silent ${GITHUB_API_URL}/users/${USERNAME}/repos | jq '.[].full_name')
 fi
 
 # loop through all the repos

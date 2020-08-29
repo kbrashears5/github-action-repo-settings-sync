@@ -29,8 +29,6 @@ jobs:
   repo_setup:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetching Local Repository
-        uses: actions/checkout@master
       - name: Repo Setup
         uses: kbrashears5/github-action-repo-setup@v1.0.0
         with:
