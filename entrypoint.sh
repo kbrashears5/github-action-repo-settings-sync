@@ -54,6 +54,8 @@ fi
 for repository in "${REPOSITORIES[@]}"; do
     echo "###[group] $repository"
 
+    repository="${repository//\"}"
+
     echo "Repository name: [$repository]"
 
     echo " "
