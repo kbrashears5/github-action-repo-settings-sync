@@ -1,9 +1,9 @@
-<h1 align="center">github-action-file-sync</h1>
+<h1 align="center">github-action-repo-setup</h1>
 
 
 <div align="center">
 
-<b>Github Action to sync files across repos</b>
+<b>Github Action to setup repositories settings and keep them in sync</b>
 
 [![version](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-setup)](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-setup)
 
