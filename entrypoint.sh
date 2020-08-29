@@ -45,7 +45,7 @@ echo " "
 
 # get all repos, if specified
 if [ "$REPOSITORIES" == "ALL" ]; then
-    echo "Getting all repositories for ${USERNAME}"
+    echo "Getting all repositories for [${USERNAME}]"
     REPOSITORIES=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -u ${USERNAME}:${GITHUB_TOKEN} --silent ${GITHUB_API_URL}/users/${USERNAME}/repos | jq '.[].full_name')
 fi
 
