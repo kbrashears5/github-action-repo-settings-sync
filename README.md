@@ -34,7 +34,6 @@ jobs:
         with:
           REPOSITORIES: |
             kbrashears5/github-action-repo-settings-sync
-          TOKEN: ${{ secrets.ACTIONS }}
           ALLOW_ISSUES: 'true'
           ALLOW_PROJECTS: 'true'
           ALLOW_WIKI: 'true'
@@ -42,6 +41,12 @@ jobs:
           MERGE_COMMIT: 'true'
           REBASE_MERGE: 'true'
           DELETE_HEAD: 'false'
+          BRANCH_PROTECTION_NAME: 'master'
+          BRANCH_PROTECTION_REQUIRED_REVIEWERS: '1'
+          BRANCH_PROTECTION_DISMISS: 'true'
+          BRANCH_PROTECTION_CODE_OWNERS: 'true'
+          BRANCH_PROTECTION_ENFORCE_ADMINS: 'false'
+          TOKEN: ${{ secrets.ACTIONS }}
 ```
 ## Parameters
 | Parameter | Required | Default | Description |
@@ -55,3 +60,8 @@ jobs:
 | MERGE_COMMIT | false | true | Whether or not to allow merge commits on the repo |
 | REBASE_MERGE | false | true | Whether or not to allow rebase merges on the repo |
 | DELETE_HEAD | false | false | Whether or not to delete head branch after merges |
+| BRANCH_PROTECTION_NAME | false | 'master' | Branch name pattern for branch protection rule |
+| BRANCH_PROTECTION_REQUIRED_REVIEWERS | false | 1 | Number of required reviewers for branch protection rule |
+| BRANCH_PROTECTION_DISMISS | false | true | Dismiss stale pull request approvals when new commits are pushed |
+| BRANCH_PROTECTION_CODE_OWNERS | false | true | Require review from Code Owners |
+| BRANCH_PROTECTION_ENFORCE_ADMINS | false | false | Enforce branch protection rules for repo admins |

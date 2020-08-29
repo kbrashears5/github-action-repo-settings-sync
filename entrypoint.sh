@@ -7,21 +7,31 @@ echo "Inputs"
 echo "---------------------------------------------"
 RAW_REPOSITORIES="$INPUT_REPOSITORIES"
 REPOSITORIES=($RAW_REPOSITORIES)
-echo "Repositories    : $REPOSITORIES"
+echo "Repositories           : $REPOSITORIES"
 ALLOW_ISSUES=($INPUT_ALLOW_ISSUES)
-echo "Allow Issues    : $ALLOW_ISSUES"
+echo "Allow Issues           : $ALLOW_ISSUES"
 ALLOW_PROJECTS=($INPUT_ALLOW_PROJECTS)
-echo "Allow Projects  : $ALLOW_PROJECTS"
+echo "Allow Projects         : $ALLOW_PROJECTS"
 ALLOW_WIKI=($INPUT_ALLOW_WIKI)
-echo "Allow Wiki      : $ALLOW_WIKI"
+echo "Allow Wiki             : $ALLOW_WIKI"
 SQUASH_MERGE=($INPUT_SQUASH_MERGE)
-echo "Squash Merge    : $SQUASH_MERGE"
+echo "Squash Merge           : $SQUASH_MERGE"
 MERGE_COMMIT=($INPUT_MERGE_COMMIT)
-echo "Merge Commit    : $MERGE_COMMIT"
+echo "Merge Commit           : $MERGE_COMMIT"
 REBASE_MERGE=($INPUT_REBASE_MERGE)
-echo "Rebase Merge    : $REBASE_MERGE"
+echo "Rebase Merge           : $REBASE_MERGE"
 DELETE_HEAD=($INPUT_DELETE_HEAD)
-echo "Delete Head     : $DELETE_HEAD"
+echo "Delete Head            : $DELETE_HEAD"
+BRANCH_PROTECTION_NAME=($INPUT_BRANCH_PROTECTION_NAME)
+echo "Branch Protection Name : $BRANCH_PROTECTION_NAME"
+BRANCH_PROTECTION_REQUIRED_REVIEWERS=($INPUT_BRANCH_PROTECTION_REQUIRED_REVIEWERS)
+echo "Required Reviewers     : $BRANCH_PROTECTION_REQUIRED_REVIEWERS"
+BRANCH_PROTECTION_DISMISS=($INPUT_BRANCH_PROTECTION_DISMISS)
+echo "Dismiss Stale          : $BRANCH_PROTECTION_DISMISS"
+BRANCH_PROTECTION_CODE_OWNERS=($INPUT_BRANCH_PROTECTION_CODE_OWNERS)
+echo "Code Owners            : $BRANCH_PROTECTION_CODE_OWNERS"
+BRANCH_PROTECTION_ENFORCE_ADMINS=($INPUT_BRANCH_PROTECTION_ENFORCE_ADMINS)
+echo "Code Owners            : $BRANCH_PROTECTION_ENFORCE_ADMINS"
 GITHUB_TOKEN="$INPUT_TOKEN"
 echo "---------------------------------------------"
 
@@ -59,6 +69,8 @@ for repository in "${REPOSITORIES[@]}"; do
     echo "Repository name: [$repository]"
 
     echo " "
+
+    echo "Setting repository options"
   
     jq -n \
     --arg allowIssues "$ALLOW_ISSUES" \
@@ -86,7 +98,30 @@ for repository in "${REPOSITORIES[@]}"; do
         ${GITHUB_API_URL}/repos/${repository}
 
     echo " "
+
+    echo "Setting [${BRANCH_PROTECTION_NAME}] branch protection rules"
     
+    jq -n \
+    --arg enforceAdmins "$BRANCH_PROTECTION_ENFORCE_ADMINS" \
+    --arg dismissStaleReviews "$BRANCH_PROTECTION_DISMISS" \
+    --arg codeOwnerReviews "$BRANCH_PROTECTION_CODE_OWNERS" \
+    --arg reviewCount "$BRANCH_PROTECTION_REQUIRED_REVIEWERS" \
+    '{
+        enforce_admins:$enforceAdmins
+        required_pull_request_reviews:{
+            dismiss_stale_reviews:$dismissStaleReviews,
+            require_code_owner_reviews:$codeOwnerReviews,
+            required_approving_review_count:$reviewCount
+        }
+    }' \
+    | curl -d @- \
+        -X PUT \
+        -H "Accept: application/vnd.github.luke-cage-preview+json" \
+        -H "Content-Type: application/json" \
+        -u ${USERNAME}:${GITHUB_TOKEN} \
+        --silent \
+        ${GITHUB_API_URL}/repos/${repository}/branches/${BRANCH_PROTECTION_NAME}/protection
+
     echo "Completed [${repository}]"
     echo "###[endgroup]"
 done
