@@ -103,10 +103,10 @@ for repository in "${REPOSITORIES[@]}"; do
     echo "Setting [${BRANCH_PROTECTION_NAME}] branch protection rules"
     
     jq -n \
-    --arg enforceAdmins "$BRANCH_PROTECTION_ENFORCE_ADMINS" \
-    --arg dismissStaleReviews "$BRANCH_PROTECTION_DISMISS" \
-    --arg codeOwnerReviews "$BRANCH_PROTECTION_CODE_OWNERS" \
-    --arg reviewCount "$BRANCH_PROTECTION_REQUIRED_REVIEWERS" \
+    --arg enforceAdmins $BRANCH_PROTECTION_ENFORCE_ADMINS \
+    --arg dismissStaleReviews $BRANCH_PROTECTION_DISMISS \
+    --arg codeOwnerReviews $BRANCH_PROTECTION_CODE_OWNERS \
+    --arg reviewCount $BRANCH_PROTECTION_REQUIRED_REVIEWERS \
     '{
         required_status_checks:null,
         enforce_admins:$enforceAdmins,
