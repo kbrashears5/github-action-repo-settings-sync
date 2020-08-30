@@ -73,14 +73,15 @@ for repository in "${REPOSITORIES[@]}"; do
 
     echo "Setting repository options"
   
+    # the argjson instead of just arg lets us pass the values not as strings
     jq -n \
-    --arg allowIssues "$ALLOW_ISSUES" \
-    --arg allowProjects "$ALLOW_PROJECTS" \
-    --arg allowWiki "$ALLOW_WIKI" \
-    --arg squashMerge "$SQUASH_MERGE" \
-    --arg mergeCommit "$MERGE_COMMIT" \
-    --arg rebaseMerge "$REBASE_MERGE" \
-    --arg deleteHead "$DELETE_HEAD" \
+    --argjson allowIssues $ALLOW_ISSUES \
+    --argjson allowProjects $ALLOW_PROJECTS \
+    --argjson allowWiki $ALLOW_WIKI \
+    --argjson squashMerge $SQUASH_MERGE \
+    --argjson mergeCommit $MERGE_COMMIT \
+    --argjson rebaseMerge $REBASE_MERGE \
+    --argjson deleteHead $DELETE_HEAD \
     '{
         has_issues:$allowIssues,
         has_projects:$allowProjects,
@@ -102,11 +103,12 @@ for repository in "${REPOSITORIES[@]}"; do
 
     echo "Setting [${BRANCH_PROTECTION_NAME}] branch protection rules"
     
+    # the argjson instead of just arg lets us pass the values not as strings
     jq -n \
-    --arg enforceAdmins $BRANCH_PROTECTION_ENFORCE_ADMINS \
-    --arg dismissStaleReviews $BRANCH_PROTECTION_DISMISS \
-    --arg codeOwnerReviews $BRANCH_PROTECTION_CODE_OWNERS \
-    --arg reviewCount $BRANCH_PROTECTION_REQUIRED_REVIEWERS \
+    --argjson enforceAdmins $BRANCH_PROTECTION_ENFORCE_ADMINS \
+    --argjson dismissStaleReviews $BRANCH_PROTECTION_DISMISS \
+    --argjson codeOwnerReviews $BRANCH_PROTECTION_CODE_OWNERS \
+    --argjson reviewCount $BRANCH_PROTECTION_REQUIRED_REVIEWERS \
     '{
         required_status_checks:null,
         enforce_admins:$enforceAdmins,
