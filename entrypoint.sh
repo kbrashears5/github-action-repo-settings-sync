@@ -108,12 +108,14 @@ for repository in "${REPOSITORIES[@]}"; do
     --arg codeOwnerReviews "$BRANCH_PROTECTION_CODE_OWNERS" \
     --arg reviewCount "$BRANCH_PROTECTION_REQUIRED_REVIEWERS" \
     '{
+        required_status_checks:null,
         enforce_admins:$enforceAdmins,
         required_pull_request_reviews:{
             dismiss_stale_reviews:$dismissStaleReviews,
             require_code_owner_reviews:$codeOwnerReviews,
             required_approving_review_count:$reviewCount
-        }
+        },
+        restrictions:null
     }' \
     | curl -d @- \
         -X PUT \
