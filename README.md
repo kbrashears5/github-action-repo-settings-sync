@@ -6,6 +6,7 @@
 <b>Github Action to setup repositories settings and keep them in sync</b>
 
 [![version](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-settings-sync)](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-settings-sync)
+[![Build Status](https://dev.azure.com/kbrashears5/github/_apis/build/status/kbrashears5.github-action-repo-settings-sync?branchName=master)](https://dev.azure.com/kbrashears5/github/_build/latest?definitionId=29&branchName=master)
 
 </div>
 
