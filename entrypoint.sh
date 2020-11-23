@@ -1,5 +1,14 @@
 #!/bin/bash
 
+STATUS=0
+
+# remember last error code
+trap 'STATUS=$?' ERR
+
+# problem matcher must exist in workspace
+cp /error-matcher.json $HOME/file-sync-error-matcher.json
+echo "::add-matcher::$HOME/file-sync-error-matcher.json"
+
 echo "Repository: [$GITHUB_REPOSITORY]"
 
 # log inputs
@@ -62,7 +71,7 @@ fi
 
 # loop through all the repos
 for repository in "${REPOSITORIES[@]}"; do
-    echo "###[group] $repository"
+    echo "::group:: $repository"
 
     # trim the quotes
     repository="${repository//\"}"
@@ -128,5 +137,7 @@ for repository in "${REPOSITORIES[@]}"; do
         ${GITHUB_API_URL}/repos/${repository}/branches/${BRANCH_PROTECTION_NAME}/protection
 
     echo "Completed [${repository}]"
-    echo "###[endgroup]"
+    echo "::endgroup::"
 done
+
+exit $STATUS

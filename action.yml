@@ -64,18 +64,3 @@ inputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  args:
-    - ${{ inputs.REPOSITORIES }}
-    - ${{ inputs.ALLOW_ISSUES }}
-    - ${{ inputs.ALLOW_PROJECTS }}
-    - ${{ inputs.ALLOW_WIKI }}
-    - ${{ inputs.SQUASH_MERGE }}
-    - ${{ inputs.MERGE_COMMIT }}
-    - ${{ inputs.REBASE_MERGE }}
-    - ${{ inputs.DELETE_HEAD }}
-    - ${{ inputs.BRANCH_PROTECTION_NAME }}
-    - ${{ inputs.BRANCH_PROTECTION_REQUIRED_REVIEWERS }}
-    - ${{ inputs.BRANCH_PROTECTION_DISMISS }}
-    - ${{ inputs.BRANCH_PROTECTION_CODE_OWNERS }}
-    - ${{ inputs.DELETE_HBRANCH_PROTECTION_ENFORCE_ADMINSEAD }}
-    - ${{ inputs.TOKEN }}
