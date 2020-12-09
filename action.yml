@@ -21,6 +21,10 @@ inputs:
     description: 'Whether or not to allow wiki on the repo'
     required: false
     default: 'true'
+  ALLOW_DISCUSSIONS:
+    description: 'Whether or not to allow discussions on the repo'
+    required: false
+    default: 'true'
   SQUASH_MERGE:
     description: 'Whether or not to allow squash merges on the repo'
     required: false

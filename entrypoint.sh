@@ -23,6 +23,8 @@ ALLOW_PROJECTS=$INPUT_ALLOW_PROJECTS
 echo "Allow Projects         : $ALLOW_PROJECTS"
 ALLOW_WIKI=$INPUT_ALLOW_WIKI
 echo "Allow Wiki             : $ALLOW_WIKI"
+ALLOW_DISCUSSIONS=$INPUT_ALLOW_DISCUSSIONS
+echo "Allow Discussions      : $ALLOW_DISCUSSIONS"
 SQUASH_MERGE=$INPUT_SQUASH_MERGE
 echo "Squash Merge           : $SQUASH_MERGE"
 MERGE_COMMIT=$INPUT_MERGE_COMMIT
@@ -87,6 +89,7 @@ for repository in "${REPOSITORIES[@]}"; do
     --argjson allowIssues $ALLOW_ISSUES \
     --argjson allowProjects $ALLOW_PROJECTS \
     --argjson allowWiki $ALLOW_WIKI \
+    --argjson allowDiscussions $ALLOW_DISCUSSIONS \
     --argjson squashMerge $SQUASH_MERGE \
     --argjson mergeCommit $MERGE_COMMIT \
     --argjson rebaseMerge $REBASE_MERGE \
@@ -95,6 +98,7 @@ for repository in "${REPOSITORIES[@]}"; do
         has_issues:$allowIssues,
         has_projects:$allowProjects,
         has_wiki:$allowWiki,
+        has_discussions:$allowDiscussion,
         allow_squash_merge:$squashMerge,
         allow_merge_commit:$mergeCommit,
         allow_rebase_merge:$rebaseMerge,

@@ -38,6 +38,7 @@ jobs:
           ALLOW_ISSUES: 'true'
           ALLOW_PROJECTS: 'true'
           ALLOW_WIKI: 'true'
+          ALLOW_DISCUSSIONS: 'true'
           SQUASH_MERGE: 'true'
           MERGE_COMMIT: 'true'
           REBASE_MERGE: 'true'
@@ -57,6 +58,7 @@ jobs:
 | ALLOW_ISSUES | false | true | Whether or not to allow issues on the repo |
 | ALLOW_PROJECTS | false | true | Whether or not to allow projects on the repo |
 | ALLOW_WIKI | false | true | Whether or not to allow wiki on the repo |
+| ALLOW_DISCUSSIONS | false | true | Whether or not to allow discussions on the repo |
 | SQUASH_MERGE | false | true | Whether or not to allow squash merges on the repo |
 | MERGE_COMMIT | false | true | Whether or not to allow merge commits on the repo |
 | REBASE_MERGE | false | true | Whether or not to allow rebase merges on the repo |
