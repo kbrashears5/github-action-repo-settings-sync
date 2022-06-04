@@ -41,6 +41,7 @@ jobs:
           SQUASH_MERGE: 'true'
           MERGE_COMMIT: 'true'
           REBASE_MERGE: 'true'
+          AUTO_MERGE: 'false'
           DELETE_HEAD: 'false'
           BRANCH_PROTECTION_NAME: 'master'
           BRANCH_PROTECTION_REQUIRED_REVIEWERS: '1'
@@ -60,6 +61,7 @@ jobs:
 | SQUASH_MERGE | false | true | Whether or not to allow squash merges on the repo |
 | MERGE_COMMIT | false | true | Whether or not to allow merge commits on the repo |
 | REBASE_MERGE | false | true | Whether or not to allow rebase merges on the repo |
+| AUTO_MERGE | false | false | Whether or not to allow auto-merge on the repo |
 | DELETE_HEAD | false | false | Whether or not to delete head branch after merges |
 | BRANCH_PROTECTION_NAME | false | 'master' | Branch name pattern for branch protection rule |
 | BRANCH_PROTECTION_REQUIRED_REVIEWERS | false | 1 | Number of required reviewers for branch protection rule |

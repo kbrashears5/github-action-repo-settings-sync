@@ -29,6 +29,8 @@ MERGE_COMMIT=$INPUT_MERGE_COMMIT
 echo "Merge Commit           : $MERGE_COMMIT"
 REBASE_MERGE=$INPUT_REBASE_MERGE
 echo "Rebase Merge           : $REBASE_MERGE"
+AUTO_MERGE=$INPUT_AUTO_MERGE
+echo "Auto-Merge             : $AUTO_MERGE"
 DELETE_HEAD=$INPUT_DELETE_HEAD
 echo "Delete Head            : $DELETE_HEAD"
 BRANCH_PROTECTION_NAME=$INPUT_BRANCH_PROTECTION_NAME
@@ -90,6 +92,7 @@ for repository in "${REPOSITORIES[@]}"; do
     --argjson squashMerge $SQUASH_MERGE \
     --argjson mergeCommit $MERGE_COMMIT \
     --argjson rebaseMerge $REBASE_MERGE \
+    --argjson autoMerge $AUTO_MERGE \
     --argjson deleteHead $DELETE_HEAD \
     '{
         has_issues:$allowIssues,
@@ -98,6 +101,7 @@ for repository in "${REPOSITORIES[@]}"; do
         allow_squash_merge:$squashMerge,
         allow_merge_commit:$mergeCommit,
         allow_rebase_merge:$rebaseMerge,
+        allow_auto_merge:$autoMerge,
         delete_branch_on_merge:$deleteHead,
     }' \
     | curl -d @- \

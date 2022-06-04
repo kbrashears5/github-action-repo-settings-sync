@@ -33,6 +33,10 @@ inputs:
     description: 'Whether or not to allow rebase merges on the repo'
     required: false
     default: 'true'
+  AUTO_MERGE:
+    description: 'Whether or not to allow auto-merge on the repo'
+    required: false
+    default: 'false'
   DELETE_HEAD:
     description: 'Whether or not to delete head branch after merges'
     required: false
