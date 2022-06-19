@@ -67,7 +67,7 @@ echo " "
 # get all repos, if specified
 if [ "$REPOSITORIES" == "ALL" ]; then
     echo "Getting all repositories for [${USERNAME}]"
-    REPOSITORIES_STRING=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -u ${USERNAME}:${GITHUB_TOKEN} --silent ${GITHUB_API_URL}/user/repos?affiliation=owner | jq '.[].full_name')
+    REPOSITORIES_STRING=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -u ${USERNAME}:${GITHUB_TOKEN} --silent ${GITHUB_API_URL}/user/repos?affiliation=owner&per_page=100 | jq '.[].full_name')
     readarray -t REPOSITORIES <<< "$REPOSITORIES_STRING"
 fi
 
