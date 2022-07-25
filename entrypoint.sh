@@ -33,6 +33,8 @@ AUTO_MERGE=$INPUT_AUTO_MERGE
 echo "Auto-Merge             : $AUTO_MERGE"
 DELETE_HEAD=$INPUT_DELETE_HEAD
 echo "Delete Head            : $DELETE_HEAD"
+BRANCH_PROTECTION_ENABLED=$INPUT_BRANCH_PROTECTION_ENABLED
+echo "Branch Protection      : $BRANCH_PROTECTION_ENABLED"
 BRANCH_PROTECTION_NAME=$INPUT_BRANCH_PROTECTION_NAME
 echo "Branch Protection Name : $BRANCH_PROTECTION_NAME"
 BRANCH_PROTECTION_REQUIRED_REVIEWERS=$INPUT_BRANCH_PROTECTION_REQUIRED_REVIEWERS
@@ -114,31 +116,41 @@ for repository in "${REPOSITORIES[@]}"; do
 
     echo " "
 
-    echo "Setting [${BRANCH_PROTECTION_NAME}] branch protection rules"
-    
-    # the argjson instead of just arg lets us pass the values not as strings
-    jq -n \
-    --argjson enforceAdmins $BRANCH_PROTECTION_ENFORCE_ADMINS \
-    --argjson dismissStaleReviews $BRANCH_PROTECTION_DISMISS \
-    --argjson codeOwnerReviews $BRANCH_PROTECTION_CODE_OWNERS \
-    --argjson reviewCount $BRANCH_PROTECTION_REQUIRED_REVIEWERS \
-    '{
-        required_status_checks:null,
-        enforce_admins:$enforceAdmins,
-        required_pull_request_reviews:{
-            dismiss_stale_reviews:$dismissStaleReviews,
-            require_code_owner_reviews:$codeOwnerReviews,
-            required_approving_review_count:$reviewCount
-        },
-        restrictions:null
-    }' \
-    | curl -d @- \
-        -X PUT \
-        -H "Accept: application/vnd.github.luke-cage-preview+json" \
-        -H "Content-Type: application/json" \
-        -u ${USERNAME}:${GITHUB_TOKEN} \
-        --silent \
-        ${GITHUB_API_URL}/repos/${repository}/branches/${BRANCH_PROTECTION_NAME}/protection
+    if [ "$BRANCH_PROTECTION_ENABLED" == $true ]; then
+        echo "Setting [${BRANCH_PROTECTION_NAME}] branch protection rules"
+        
+        # the argjson instead of just arg lets us pass the values not as strings
+        jq -n \
+        --argjson enforceAdmins $BRANCH_PROTECTION_ENFORCE_ADMINS \
+        --argjson dismissStaleReviews $BRANCH_PROTECTION_DISMISS \
+        --argjson codeOwnerReviews $BRANCH_PROTECTION_CODE_OWNERS \
+        --argjson reviewCount $BRANCH_PROTECTION_REQUIRED_REVIEWERS \
+        '{
+            required_status_checks:null,
+            enforce_admins:$enforceAdmins,
+            required_pull_request_reviews:{
+                dismiss_stale_reviews:$dismissStaleReviews,
+                require_code_owner_reviews:$codeOwnerReviews,
+                required_approving_review_count:$reviewCount
+            },
+            restrictions:null
+        }' \
+        | curl -d @- \
+            -X PUT \
+            -H "Accept: application/vnd.github.luke-cage-preview+json" \
+            -H "Content-Type: application/json" \
+            -u ${USERNAME}:${GITHUB_TOKEN} \
+            --silent \
+            ${GITHUB_API_URL}/repos/${repository}/branches/${BRANCH_PROTECTION_NAME}/protection
+    else
+        curl \
+            -X DELETE \
+            -H "Accept: application/vnd.github.luke-cage-preview+json" \
+            -H "Content-Type: application/json" \
+            -u ${USERNAME}:${GITHUB_TOKEN} \
+            --silent \
+            ${GITHUB_API_URL}/repos/${repository}/branches/${BRANCH_PROTECTION_NAME}/protection
+    fi
 
     echo "Completed [${repository}]"
     echo "::endgroup::"

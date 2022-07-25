@@ -43,7 +43,8 @@ jobs:
           REBASE_MERGE: 'true'
           AUTO_MERGE: 'false'
           DELETE_HEAD: 'false'
-          BRANCH_PROTECTION_NAME: 'master'
+          BRANCH_PROTECTION_ENABLED: true
+          BRANCH_PROTECTION_NAME: 'main'
           BRANCH_PROTECTION_REQUIRED_REVIEWERS: '1'
           BRANCH_PROTECTION_DISMISS: 'true'
           BRANCH_PROTECTION_CODE_OWNERS: 'true'
@@ -63,6 +64,7 @@ jobs:
 | REBASE_MERGE | false | true | Whether or not to allow rebase merges on the repo |
 | AUTO_MERGE | false | false | Whether or not to allow auto-merge on the repo |
 | DELETE_HEAD | false | false | Whether or not to delete head branch after merges |
+| BRANCH_PROTECTION_ENABLED | false | false | Whether or not to enable branch protection |
 | BRANCH_PROTECTION_NAME | false | 'master' | Branch name pattern for branch protection rule |
 | BRANCH_PROTECTION_REQUIRED_REVIEWERS | false | 1 | Number of required reviewers for branch protection rule |
 | BRANCH_PROTECTION_DISMISS | false | true | Dismiss stale pull request approvals when new commits are pushed |
