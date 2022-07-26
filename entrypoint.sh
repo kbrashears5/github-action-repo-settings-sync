@@ -116,7 +116,7 @@ for repository in "${REPOSITORIES[@]}"; do
 
     echo " "
 
-    if [ "$BRANCH_PROTECTION_ENABLED" == $true ]; then
+    if [ "$BRANCH_PROTECTION_ENABLED" == "true" ]; then
         echo "Setting [${BRANCH_PROTECTION_NAME}] branch protection rules"
         
         # the argjson instead of just arg lets us pass the values not as strings
