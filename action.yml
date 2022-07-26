@@ -41,10 +41,14 @@ inputs:
     description: 'Whether or not to delete head branch after merges'
     required: false
     default: 'false'
+  BRANCH_PROTECTION_ENABLED:
+    description: 'Whether or not to enable branch protection'
+    required: false
+    default: 'false'
   BRANCH_PROTECTION_NAME:
     description: 'Branch name pattern for branch protection rule'
     required: false
-    default: 'master'
+    default: 'main'
   BRANCH_PROTECTION_REQUIRED_REVIEWERS:
     description: 'Number of required reviewers for branch protection rule'
     required: false
