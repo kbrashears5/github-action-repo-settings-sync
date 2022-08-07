@@ -69,8 +69,19 @@ echo " "
 # get all repos, if specified
 if [ "$REPOSITORIES" == "ALL" ]; then
     echo "Getting all repositories for [${USERNAME}]"
-    REPOSITORIES_STRING=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -u ${USERNAME}:${GITHUB_TOKEN} --silent "${GITHUB_API_URL}/user/repos?affiliation=owner&per_page=100" | jq '.[].full_name')
-    readarray -t REPOSITORIES <<< "$REPOSITORIES_STRING"
+
+    PAGE=1
+    REPOSITORIES=()
+    while true; do
+        REPOSITORIES_STRING=$(curl -X GET -H "Accept: application/vnd.github.v3+json" -u ${USERNAME}:${GITHUB_TOKEN} --silent "${GITHUB_API_URL}/user/repos?affiliation=owner&per_page=100&page=${PAGE}" | jq '.[].full_name')
+
+        # If the latest reponse contains no repositories, exit the loop
+        [[ ! -z "$REPOSITORIES_STRING" ]] || break
+
+        # Append results to REPOSITORIES array, increment page number
+        readarray -t -O "${#REPOSITORIES[@]}" REPOSITORIES <<< "$REPOSITORIES_STRING"
+        PAGE=$((PAGE+1))
+    done
 fi
 
 # loop through all the repos
