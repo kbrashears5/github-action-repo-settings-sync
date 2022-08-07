@@ -142,7 +142,7 @@ for repository in "${REPOSITORIES[@]}"; do
             -u ${USERNAME}:${GITHUB_TOKEN} \
             --silent \
             ${GITHUB_API_URL}/repos/${repository}/branches/${BRANCH_PROTECTION_NAME}/protection
-    else
+    elif [ "$BRANCH_PROTECTION_ENABLED" == "false" ]; then
         curl \
             -X DELETE \
             -H "Accept: application/vnd.github.luke-cage-preview+json" \
