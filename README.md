@@ -31,7 +31,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Repo Setup
-        uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
+        uses: kbrashears5/github-action-repo-settings-sync@2.0
         with:
           REPOSITORIES: |
             kbrashears5/github-action-repo-settings-sync
