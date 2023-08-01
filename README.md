@@ -5,14 +5,11 @@
 
 <b>Github Action to setup repositories settings and keep them in sync</b>
 
-[![version](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-settings-sync)](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-settings-sync)
-[![Build Status](https://dev.azure.com/kbrashears5/github/_apis/build/status/kbrashears5.github-action-repo-settings-sync?branchName=master)](https://dev.azure.com/kbrashears5/github/_build/latest?definitionId=29&branchName=master)
-
 </div>
 
 
 # Use Cases
-Great for keeping repository settings in sync across all repos. I constantly forget when creating new repos to go tweak all my repository settings how I like them, set up branch policys, etc. This allows me to add my new repo to the list (or just take the default of all and have no steps) and automatically have my settings there.
+Great for keeping repository settings in sync across all repos. I constantly forget when creating new repos to go tweak all my repository settings how I like them, set up branch policies, etc. This allows me to add my new repo to the list (or just take the default of all and have no steps) and automatically have my settings there.
 
 # Setup
 Create a new file called `/.github/workflows/repo-settings-sync.yml` that looks like so:
@@ -31,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Repo Setup
-        uses: kbrashears5/github-action-repo-settings-sync@v1.0.0
+        uses: kbrashears5/github-action-repo-settings-sync@v3.0.0
         with:
           REPOSITORIES: |
             kbrashears5/github-action-repo-settings-sync
