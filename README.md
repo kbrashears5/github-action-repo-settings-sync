@@ -1,12 +1,7 @@
-<h1 align="center">github-action-repo-settings-sync</h1>
+# github-action-repo-settings-sync
+Github Action to setup repositories settings and keep them in sync
 
-
-<div align="center">
-
-<b>Github Action to setup repositories settings and keep them in sync</b>
-
-</div>
-
+[![version](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-settings-sync)](https://img.shields.io/github/v/release/kbrashears5/github-action-repo-settings-sync)
 
 # Use Cases
 Great for keeping repository settings in sync across all repos. I constantly forget when creating new repos to go tweak all my repository settings how I like them, set up branch policies, etc. This allows me to add my new repo to the list (or just take the default of all and have no steps) and automatically have my settings there.
